@@ -227,7 +227,7 @@
          <string>Memory</string>
         </property>
        </widget>
-       <widget class="QSlider" name="horizontalSlider">
+       <widget class="QSlider" name="MemoryHorizontalSlider">
         <property name="geometry">
          <rect>
           <x>100</x>
@@ -240,7 +240,7 @@
          <enum>Qt::Horizontal</enum>
         </property>
        </widget>
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="MemorySpinBox">
         <property name="geometry">
          <rect>
           <x>400</x>

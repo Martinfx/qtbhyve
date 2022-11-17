@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDebug>
 #include <iostream>
 
 #include "dialog.h"
@@ -27,13 +28,12 @@ private:
     Dialog *m_newVirtualMachine;
 
 };
-#endif // MAINWINDOW_H
 
-class VirtualMachine
+class VirtualMachine2
 {
 public:
-    VirtualMachine() {}
-    ~VirtualMachine(){}
+    VirtualMachine2() {}
+    ~VirtualMachine2(){}
 
     QString getName();
     QString getType();
@@ -51,3 +51,5 @@ private:
     QString m_version;
     int memory;
 };
+
+#endif // MAINWINDOW_H
