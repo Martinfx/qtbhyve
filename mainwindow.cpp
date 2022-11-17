@@ -20,8 +20,7 @@ void MainWindow::on_newVirtual_clicked()
 {
     m_newVirtualMachine = new Dialog();
     m_newVirtualMachine->setModal(true);
-    //m_newVirtualMachine->setWindowModality(Qt::WindowModality::ApplicationModal);
-    //m_newVirtualMachine->setWindowModality(Qt::WindowModal);
+
     m_newVirtualMachine->show();
     qDebug() <<  m_newVirtualMachine->getMemory();
 }

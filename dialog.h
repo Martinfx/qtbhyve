@@ -4,8 +4,6 @@
 #include <QDialog>
 #include <QProcess>
 #include <QDebug>
-#include <iostream>
-#include <string>
 
 namespace Ui {
 class Dialog;
@@ -25,6 +23,7 @@ private slots:
     void on_NextPushButton_2_clicked();
     void on_MemoryHorizontalSlider_valueChanged(int value);
     void on_MemorySpinBox_valueChanged(int arg1);
+    void on_OSComboBox_activated(const QString &arg1);
 
 private:
     Ui::Dialog *ui;

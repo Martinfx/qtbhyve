@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="dialog.ui" line="55"/>
-        <location filename="dialog.ui" line="265"/>
+        <location filename="dialog.ui" line="190"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
@@ -26,33 +26,28 @@
     </message>
     <message>
         <location filename="dialog.ui" line="105"/>
-        <location filename="dialog.ui" line="110"/>
-        <location filename="dialog.ui" line="115"/>
-        <location filename="dialog.ui" line="120"/>
-        <location filename="dialog.ui" line="125"/>
-        <location filename="dialog.ui" line="130"/>
-        <location filename="dialog.ui" line="135"/>
-        <location filename="dialog.ui" line="140"/>
-        <location filename="dialog.ui" line="145"/>
-        <location filename="dialog.ui" line="173"/>
-        <location filename="dialog.ui" line="178"/>
-        <location filename="dialog.ui" line="183"/>
-        <location filename="dialog.ui" line="188"/>
-        <location filename="dialog.ui" line="193"/>
-        <location filename="dialog.ui" line="198"/>
-        <location filename="dialog.ui" line="203"/>
-        <location filename="dialog.ui" line="208"/>
-        <location filename="dialog.ui" line="213"/>
-        <source>New Item</source>
+        <source>Micro$oft Windows</source>
+        <oldsource>MIcrosoft Windows</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog.ui" line="159"/>
+        <location filename="dialog.ui" line="110"/>
+        <source>Linux</source>
+        <oldsource>LInux</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialog.ui" line="115"/>
+        <source>BSD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialog.ui" line="129"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog.ui" line="227"/>
+        <location filename="dialog.ui" line="152"/>
         <source>Memory</source>
         <translation type="unfinished"></translation>
     </message>
