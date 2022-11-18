@@ -12,17 +12,17 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete m_newVirtualMachine;
+    delete m_dialog;
 }
 
 
 void MainWindow::on_newVirtual_clicked()
 {
-    m_newVirtualMachine = new Dialog();
-    m_newVirtualMachine->setModal(true);
+    m_dialog = new Dialog();
+    m_dialog->setModal(true);
+    m_dialog->show();
 
-    m_newVirtualMachine->show();
-    qDebug() <<  m_newVirtualMachine->getMemory();
+    //m_virtalMachine.push_back(m_dialog->;
 }
 
 

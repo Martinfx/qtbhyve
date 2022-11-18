@@ -25,8 +25,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Dialog *m_newVirtualMachine;
-
+    Dialog *m_dialog;
+    QVector<VirtualMachine*> m_virtalMachine;
 };
 
 class VirtualMachine2
