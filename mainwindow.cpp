@@ -45,6 +45,7 @@ void MainWindow::test() {
         qDebug() << "Type: "    << i->getType();
         qDebug() << "Name: "    << i->getName();
         qDebug() << "Memory: "  << i->getMemory();
+        qDebug() << "Ncpu: "    << i->getCpu();
         counter++;
     }
 }
@@ -54,9 +55,11 @@ void MainWindow::on_listVirtuals_itemClicked(QListWidgetItem *item)
     for(auto i : m_virtualMachine) {
         if(item->text() == i->getName()) {
             qDebug() << "---------------";
-            qDebug() << i->getName();
-            qDebug() << i->getMemory();
-            //qDebug() << "---------------";
+            qDebug() << "Version: " << i->getVersion();
+            qDebug() << "Type: "    << i->getType();
+            qDebug() << "Name: "    << i->getName();
+            qDebug() << "Memory: "  << i->getMemory();
+            qDebug() << "Ncpu: "    << i->getCpu();
         }
     }
 }
@@ -70,7 +73,8 @@ void MainWindow::write() {
         jsonObjectVirtuals.insert("memory", QJsonValue(i->getMemory()));
         jsonObjectVirtuals.insert("type", QJsonValue(i->getType()));
         jsonObjectVirtuals.insert("name", QJsonValue(i->getName()));
-        jsonObjectVirtuals.insert("Version", QJsonValue(i->getVersion()));
+        jsonObjectVirtuals.insert("version", QJsonValue(i->getVersion()));
+        jsonObjectVirtuals.insert("ncpu", QJsonValue(i->getCpu()));
         mainJsonObject.push_back(jsonObjectVirtuals);
     }
 
@@ -105,7 +109,8 @@ void MainWindow::read() {
             virtualMachine->setName(i.toObject().value("name").toString());
             virtualMachine->setMemory(i.toObject().value("memory").toInt());
             virtualMachine->setType(i.toObject().value("type").toString());
-            virtualMachine->setVersion(i.toObject().value("Version").toString());
+            virtualMachine->setVersion(i.toObject().value("version").toString());
+            virtualMachine->setCpu(i.toObject().value("ncpu").toInt());
             m_virtualMachine.push_back(virtualMachine);
             ui->listVirtuals->addItem(virtualMachine->getName());
         }

@@ -9,24 +9,27 @@
 class VirtualMachine
 {
 public:
-    VirtualMachine() {}
-    ~VirtualMachine(){}
+    VirtualMachine() : m_memory(0), m_cpu(0) {}
+    ~VirtualMachine() {}
 
     QString getName();
     QString getType();
     QString getVersion();
     int getMemory();
+    int getCpu();
 
-    void setName(QString name);
-    void setType(QString type);
-    void setVersion(QString version);
+    void setName(const QString &name);
+    void setType(const QString &type);
+    void setVersion(const QString &version);
     void setMemory(int memory);
+    void setCpu(int cpu);
 
 private:
     QString m_name;
     QString m_type;
     QString m_version;
     int m_memory;
+    int m_cpu;
 };
 
 namespace Ui {
@@ -40,7 +43,8 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
-    int getComputeMemory();
+    int getPhysMem();
+    int getNCpu();
     std::shared_ptr<VirtualMachine> getVirtualMachine();
 
 signals:
@@ -56,6 +60,8 @@ private slots:
     void on_OSVersionComboBox_activated(const QString &arg1);
     void on_buttonBox_accepted();
     void on_buttonBox_rejected();
+    void on_CpuHorizontalSlider_valueChanged(int value);
+    void on_CpuSpinBox_valueChanged(int arg1);
 
 private:
     void Memory();

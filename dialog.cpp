@@ -17,15 +17,19 @@ int VirtualMachine::getMemory() {
     return m_memory;
 }
 
-void VirtualMachine::setName(QString name) {
+int VirtualMachine::getCpu() {
+    return m_cpu;
+}
+
+void VirtualMachine::setName(const QString &name) {
     m_name = name;
 }
 
-void VirtualMachine::setType(QString type) {
+void VirtualMachine::setType(const QString &type) {
     m_type = type;
 }
 
-void VirtualMachine::setVersion(QString version) {
+void VirtualMachine::setVersion(const QString &version) {
     m_version = version;
 }
 
@@ -33,10 +37,17 @@ void VirtualMachine::setMemory(int memory) {
     m_memory = memory;
 }
 
+
+void VirtualMachine::setCpu(int cpu) {
+    m_cpu = cpu;
+}
+
 Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
     ui->setupUi(this);
-    ui->MemorySpinBox->setRange(4, getComputeMemory());
-    ui->MemoryHorizontalSlider->setRange(4, getComputeMemory());
+    ui->MemorySpinBox->setRange(4, getPhysMem());
+    ui->MemoryHorizontalSlider->setRange(4, getPhysMem());
+    ui->CpuHorizontalSlider->setRange(1, getNCpu());
+    ui->CpuSpinBox->setRange(1, getNCpu());
 
     QString OS = ui->OSComboBox->currentText();
     if (OS == "Micro$oft Windows") {
@@ -70,12 +81,20 @@ void Dialog::on_NextPushButton_2_clicked() {
 
 void Dialog::on_MemoryHorizontalSlider_valueChanged(int value) {
     ui->MemorySpinBox->setValue(value);
-    // m_virtualMachine->setMemory(value);
 }
 
 void Dialog::on_MemorySpinBox_valueChanged(int arg1) {
     ui->MemoryHorizontalSlider->setValue(arg1);
-    // m_virtualMachine->setMemory(arg1);
+}
+
+void Dialog::on_CpuHorizontalSlider_valueChanged(int value)
+{
+    ui->CpuSpinBox->setValue(value);
+}
+
+void Dialog::on_CpuSpinBox_valueChanged(int arg1)
+{
+    ui->CpuHorizontalSlider->setValue(arg1);
 }
 
 void Dialog::on_OSComboBox_activated(const QString &arg1) {
@@ -111,7 +130,7 @@ void Dialog::on_OSComboBox_activated(const QString &arg1) {
 }
 
 void Dialog::on_OSVersionComboBox_activated(const QString &arg1) {
-    if (arg1 == "Windows 7" || "Windows 8" || "Windows 10") {
+    if (arg1 == "Windows 7" || arg1 == "Windows 8" || arg1 == "Windows 10") {
         ui->MemoryHorizontalSlider->setValue(2048);
     }
 
@@ -124,7 +143,7 @@ void Dialog::on_lineEdit_textEdited(const QString &arg1) {
     m_virtualMachine->setName(arg1);
 }
 
-int Dialog::getComputeMemory() {
+int Dialog::getPhysMem() {
     QProcess process;
     process.start("sysctl", QStringList() << "hw.physmem");
     process.waitForFinished();
@@ -133,6 +152,17 @@ int Dialog::getComputeMemory() {
     physmem.remove("hw.physmem: ");
     qDebug() << physmem;
     return (int)(physmem.toDouble() / 1024 / 1024);
+}
+
+int Dialog::getNCpu() {
+    QProcess process;
+    process.start("sysctl", QStringList() << "hw.ncpu");
+    process.waitForFinished();
+    QString ncpu = process.readAllStandardOutput();
+    process.close();
+    ncpu.remove("hw.ncpu: ");
+    qDebug() << ncpu;
+    return ncpu.toInt();
 }
 
 void Dialog::Memory() {
@@ -144,6 +174,7 @@ void Dialog::on_buttonBox_accepted() {
     m_virtualMachine->setType(ui->OSComboBox->currentText());
     m_virtualMachine->setVersion(ui->OSVersionComboBox->currentText());
     m_virtualMachine->setMemory(ui->MemoryHorizontalSlider->value());
+    m_virtualMachine->setCpu(ui->CpuHorizontalSlider->value());
     emit VirtualMachineAccept();
     Dialog::close();
 }
@@ -153,5 +184,6 @@ void Dialog::on_buttonBox_rejected() {
     m_virtualMachine->setType("");
     m_virtualMachine->setVersion("");
     m_virtualMachine->setMemory(0);
+    m_virtualMachine->setCpu(0);
     Dialog::close();
 }

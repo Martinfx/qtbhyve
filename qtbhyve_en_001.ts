@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="dialog.ui" line="55"/>
-        <location filename="dialog.ui" line="190"/>
+        <location filename="dialog.ui" line="226"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
@@ -49,6 +49,11 @@
     <message>
         <location filename="dialog.ui" line="152"/>
         <source>Memory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialog.ui" line="201"/>
+        <source>Cpu</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
