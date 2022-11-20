@@ -60,64 +60,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="35"/>
-        <location filename="mainwindow.ui" line="42"/>
-        <location filename="mainwindow.ui" line="49"/>
-        <location filename="mainwindow.ui" line="56"/>
-        <location filename="mainwindow.ui" line="63"/>
-        <location filename="mainwindow.ui" line="70"/>
-        <location filename="mainwindow.ui" line="77"/>
-        <location filename="mainwindow.ui" line="84"/>
-        <location filename="mainwindow.ui" line="91"/>
-        <location filename="mainwindow.ui" line="98"/>
-        <location filename="mainwindow.ui" line="105"/>
-        <location filename="mainwindow.ui" line="112"/>
-        <location filename="mainwindow.ui" line="119"/>
-        <source>TextLabel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="129"/>
-        <location filename="mainwindow.ui" line="134"/>
-        <location filename="mainwindow.ui" line="139"/>
-        <location filename="mainwindow.ui" line="144"/>
-        <location filename="mainwindow.ui" line="149"/>
-        <location filename="mainwindow.ui" line="154"/>
-        <location filename="mainwindow.ui" line="159"/>
-        <location filename="mainwindow.ui" line="164"/>
-        <location filename="mainwindow.ui" line="169"/>
-        <location filename="mainwindow.ui" line="174"/>
-        <location filename="mainwindow.ui" line="179"/>
-        <source>New Item</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="187"/>
+        <location filename="mainwindow.ui" line="36"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="207"/>
+        <location filename="mainwindow.ui" line="43"/>
         <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="214"/>
+        <location filename="mainwindow.ui" line="50"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="232"/>
+        <location filename="mainwindow.ui" line="100"/>
         <source>FIle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="237"/>
+        <location filename="mainwindow.ui" line="105"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="245"/>
+        <location filename="mainwindow.ui" line="113"/>
         <source>toolBar</source>
         <translation type="unfinished"></translation>
     </message>

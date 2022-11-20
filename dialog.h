@@ -40,8 +40,11 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
-    int getHwMemory();
-    void Memory();
+    int getComputeMemory();
+    std::shared_ptr<VirtualMachine> getVirtualMachine();
+
+signals:
+    void VirtualMachineAccept();
 
 private slots:
     void on_NextPushButton_clicked();
@@ -51,9 +54,13 @@ private slots:
     void on_OSComboBox_activated(const QString &arg1);
     void on_lineEdit_textEdited(const QString &arg1);
     void on_OSVersionComboBox_activated(const QString &arg1);
+    void on_buttonBox_accepted();
+    void on_buttonBox_rejected();
 
 private:
+    void Memory();
+
     Ui::Dialog *ui;
-    VirtualMachine *m_virtualMachine;
+    std::shared_ptr<VirtualMachine>  m_virtualMachine;
 };
 #endif // DIALOG_H
