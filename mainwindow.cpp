@@ -27,7 +27,11 @@ void MainWindow::on_newVirtual_clicked()
     QObject::connect(m_dialog.get(), SIGNAL(VirtualMachineAccept()), this,
                      SLOT(addItem()));
     m_dialog->show();
-    m_virtalMachine.push_back(m_dialog->getVirtualMachine());
+
+    if(!m_dialog->getVirtualMachine()->getName().isEmpty() ||
+        !m_dialog->getVirtualMachine()->getType().isEmpty()){
+        m_virtualMachine.push_back(m_dialog->getVirtualMachine());
+    }
 
     //qDebug() << m_virtalMachine.count();
     //qDebug() << m_dialog->getVirtualMachine()->getName();
@@ -35,7 +39,7 @@ void MainWindow::on_newVirtual_clicked()
 
 void MainWindow::test() {
     int counter = 0;
-    for(auto i : m_virtalMachine) {
+    for(auto i : m_virtualMachine) {
         qDebug() << counter ;
         qDebug() << "Version: " << i->getVersion();
         qDebug() << "Type: "    << i->getType();
@@ -43,12 +47,11 @@ void MainWindow::test() {
         qDebug() << "Memory: "  << i->getMemory();
         counter++;
     }
-    //counter = 0;
 }
 
 void MainWindow::on_listVirtuals_itemClicked(QListWidgetItem *item)
 {
-    for(auto i : m_virtalMachine) {
+    for(auto i : m_virtualMachine) {
         if(item->text() == i->getName()) {
             qDebug() << "---------------";
             qDebug() << i->getName();
@@ -56,15 +59,13 @@ void MainWindow::on_listVirtuals_itemClicked(QListWidgetItem *item)
             //qDebug() << "---------------";
         }
     }
-    //qDebug() << ;
 }
 
 void MainWindow::write() {
     QJsonArray mainJsonObject;
     QJsonObject jsonObjectVirtuals;
     int counter = 0;
-    for(auto i : m_virtalMachine) {
-        //qDebug() << counter ;
+    for(auto i : m_virtualMachine) {
         jsonObjectVirtuals.insert("virtual", QJsonValue( counter++));
         jsonObjectVirtuals.insert("memory", QJsonValue(i->getMemory()));
         jsonObjectVirtuals.insert("type", QJsonValue(i->getType()));
@@ -73,13 +74,11 @@ void MainWindow::write() {
         mainJsonObject.push_back(jsonObjectVirtuals);
     }
 
-    // mainJsonObject.insert("virtual", jsonObjectVirtuals);
-
     QJsonDocument jsonDoc;
     jsonDoc.setArray(mainJsonObject);
     QByteArray data = jsonDoc.toJson();
 
-    if( m_virtalMachine.count() > 0)  {
+    if( m_virtualMachine.count() > 0)  {
         QFile file("save.json");
         file.open(QIODevice::WriteOnly);
         file.write(data);
@@ -93,25 +92,29 @@ void MainWindow::read() {
     QString json = file.readAll();
     file.close();
 
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(json.toUtf8());
-    QJsonArray arr = jsonDoc.array();
+    QJsonParseError err;
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(json.toUtf8(), &err);
+    if (err.error != QJsonParseError::NoError) {
+        qDebug() << err.errorString();
+    } else {
+        QJsonArray arr = jsonDoc.array();
 
-    for(auto i : arr ) {
-        qDebug() << "memory: " << i.toObject().value("memory").toDouble();
-        std::shared_ptr<VirtualMachine> virtualMachine = std::make_shared<VirtualMachine>();
-        virtualMachine->setName(i.toObject().value("name").toString());
-        virtualMachine->setMemory(i.toObject().value("memory").toInt());
-        virtualMachine->setType(i.toObject().value("type").toString());
-        virtualMachine->setVersion(i.toObject().value("Version").toString());
-        m_virtalMachine.push_back(virtualMachine);
+        for(auto i : arr ) {
+            qDebug() << "memory: " << i.toObject().value("memory").toDouble();
+            std::shared_ptr<VirtualMachine> virtualMachine = std::make_shared<VirtualMachine>();
+            virtualMachine->setName(i.toObject().value("name").toString());
+            virtualMachine->setMemory(i.toObject().value("memory").toInt());
+            virtualMachine->setType(i.toObject().value("type").toString());
+            virtualMachine->setVersion(i.toObject().value("Version").toString());
+            m_virtualMachine.push_back(virtualMachine);
+            ui->listVirtuals->addItem(virtualMachine->getName());
+        }
+
+        qDebug() << m_virtualMachine.count();
     }
-
-    qDebug() << m_virtalMachine.count();
 }
-
 
 void MainWindow::on_settingsVirtual_clicked()
 {
     test();
 }
-

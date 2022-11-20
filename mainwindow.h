@@ -28,13 +28,12 @@ public slots:
 private slots:
     void on_newVirtual_clicked();
     void on_listVirtuals_itemClicked(QListWidgetItem *item);
-
     void on_settingsVirtual_clicked();
 
 private:
     Ui::MainWindow *ui;
     std::shared_ptr<Dialog> m_dialog;
-    QVector< std::shared_ptr<VirtualMachine>> m_virtalMachine;
+    QVector< std::shared_ptr<VirtualMachine>> m_virtualMachine;
     void test();
     void read();
     void write();

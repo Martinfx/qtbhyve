@@ -122,11 +122,6 @@ void Dialog::on_OSVersionComboBox_activated(const QString &arg1) {
 
 void Dialog::on_lineEdit_textEdited(const QString &arg1) {
     m_virtualMachine->setName(arg1);
-
-    /*if(arg1.isEmpty()){
-    ui->lineEdit->setText("VirtualMachine");
-    m_virtualMachine->setName(arg1);
-}*/
 }
 
 int Dialog::getComputeMemory() {
