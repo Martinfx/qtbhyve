@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    read();
 }
 
 MainWindow::~MainWindow()
@@ -67,21 +68,47 @@ void MainWindow::write() {
         jsonObjectVirtuals.insert("virtual", QJsonValue( counter++));
         jsonObjectVirtuals.insert("memory", QJsonValue(i->getMemory()));
         jsonObjectVirtuals.insert("type", QJsonValue(i->getType()));
-        jsonObjectVirtuals.insert("Name", QJsonValue(i->getName()));
+        jsonObjectVirtuals.insert("name", QJsonValue(i->getName()));
         jsonObjectVirtuals.insert("Version", QJsonValue(i->getVersion()));
         mainJsonObject.push_back(jsonObjectVirtuals);
     }
+
     // mainJsonObject.insert("virtual", jsonObjectVirtuals);
 
     QJsonDocument jsonDoc;
     jsonDoc.setArray(mainJsonObject);
     QByteArray data = jsonDoc.toJson();
 
-    QFile file("save.json");
-    file.open(QIODevice::WriteOnly);
-    file.write(data);
-    file.close();
+    if( m_virtalMachine.count() > 0)  {
+        QFile file("save.json");
+        file.open(QIODevice::WriteOnly);
+        file.write(data);
+        file.close();
+    }
 }
+
+void MainWindow::read() {
+    QFile file("save.json");
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    QString json = file.readAll();
+    file.close();
+
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(json.toUtf8());
+    QJsonArray arr = jsonDoc.array();
+
+    for(auto i : arr ) {
+        qDebug() << "memory: " << i.toObject().value("memory").toDouble();
+        std::shared_ptr<VirtualMachine> virtualMachine = std::make_shared<VirtualMachine>();
+        virtualMachine->setName(i.toObject().value("name").toString());
+        virtualMachine->setMemory(i.toObject().value("memory").toInt());
+        virtualMachine->setType(i.toObject().value("type").toString());
+        virtualMachine->setVersion(i.toObject().value("Version").toString());
+        m_virtalMachine.push_back(virtualMachine);
+    }
+
+    qDebug() << m_virtalMachine.count();
+}
+
 
 void MainWindow::on_settingsVirtual_clicked()
 {
