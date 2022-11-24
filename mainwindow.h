@@ -8,6 +8,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QFile>
+#include <QFileDialog>
 #include "dialog.h"
 
 QT_BEGIN_NAMESPACE
@@ -35,7 +36,9 @@ private:
     std::shared_ptr<Dialog> m_dialog;
     QVector< std::shared_ptr<VirtualMachine>> m_virtualMachine;
     void test();
+    // read data from json file
     void read();
+    // write data to json file
     void write();
 };
 

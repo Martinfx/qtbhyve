@@ -1,6 +1,6 @@
 ﻿#include "dialog.h"
 #include "ui_dialog.h"
-
+#include <QFileDialog>
 QString VirtualMachine::getName() {
     return m_name;
 }
@@ -21,6 +21,34 @@ int VirtualMachine::getCpu() {
     return m_cpu;
 }
 
+QString VirtualMachine::getHostbridge() {
+    return m_hostbridge;
+}
+
+QString VirtualMachine::getAhcicd() {
+    return m_ahcicd;
+}
+
+QString VirtualMachine::getAhcihd() {
+    return m_ahcihd;
+}
+
+QString VirtualMachine::getVirtio() {
+    return m_virtio;
+}
+
+QString VirtualMachine::getIp() {
+    return m_ip;
+}
+
+int VirtualMachine::getHeigh(){
+    return m_height;
+}
+
+int VirtualMachine::getWidth(){
+    return m_width;
+}
+
 void VirtualMachine::setName(const QString &name) {
     m_name = name;
 }
@@ -37,9 +65,36 @@ void VirtualMachine::setMemory(int memory) {
     m_memory = memory;
 }
 
-
 void VirtualMachine::setCpu(int cpu) {
     m_cpu = cpu;
+}
+
+void VirtualMachine::setHostbridge(const QString &hostbridge){
+    m_hostbridge = hostbridge;
+}
+
+void VirtualMachine::setAhcicd(const QString &ahcicd){
+    m_ahcicd = ahcicd;
+}
+
+void VirtualMachine::setAhcihd(const QString &ahcihd){
+    m_ahcihd = ahcihd;
+}
+
+void VirtualMachine::setVirtio(const QString &virtio){
+    m_virtio = virtio;
+}
+
+void VirtualMachine::setIp(const QString &ip) {
+    m_ip = ip;
+}
+
+void VirtualMachine::setHeight(int height){
+    m_height = height;
+}
+
+void VirtualMachine::setWidth(int width)  {
+    m_width = width;
 }
 
 Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
@@ -187,3 +242,23 @@ void Dialog::on_buttonBox_rejected() {
     m_virtualMachine->setCpu(0);
     Dialog::close();
 }
+
+void Dialog::on_pushButtonChooseIso_clicked()
+{
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                    "/home",
+                                                    tr("Iso (*.iso)"));
+    qDebug() << filePath;
+    ui->lineEditPathIso->setText(filePath);
+}
+
+
+void Dialog::on_pushButtonChooseImg_clicked()
+{
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                    "/home",
+                                                    tr("Img (*.img)"));
+    qDebug() << filePath;
+    ui->lineEditPathImg->setText(filePath);
+}
+

@@ -19,7 +19,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>261</width>
+      <width>341</width>
       <height>511</height>
      </rect>
     </property>
@@ -27,8 +27,12 @@
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
-     <item row="4" column="4">
-      <layout class="QGridLayout" name="gridLayout_3"/>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="playVirtual">
+       <property name="text">
+        <string>Play</string>
+       </property>
+      </widget>
      </item>
      <item row="0" column="0">
       <widget class="QPushButton" name="newVirtual">
@@ -37,21 +41,7 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="playVirtual">
-       <property name="text">
-        <string>Play</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="settingsVirtual">
-       <property name="text">
-        <string>Settings</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" colspan="3">
+     <item row="1" column="0" colspan="4">
       <widget class="QListWidget" name="listVirtuals">
        <property name="enabled">
         <bool>true</bool>
@@ -72,14 +62,31 @@
        </property>
       </widget>
      </item>
+     <item row="4" column="5">
+      <layout class="QGridLayout" name="gridLayout_3"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="settingsVirtual">
+       <property name="text">
+        <string>Settings</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>340</x>
       <y>-1</y>
-      <width>391</width>
+      <width>311</width>
       <height>511</height>
      </rect>
     </property>
@@ -104,6 +111,7 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuFIle"/>
    <addaction name="menuhelp"/>
@@ -119,6 +127,11 @@
     <bool>false</bool>
    </attribute>
   </widget>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

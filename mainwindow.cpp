@@ -26,15 +26,12 @@ void MainWindow::on_newVirtual_clicked()
     m_dialog->setModal(true);
     QObject::connect(m_dialog.get(), SIGNAL(VirtualMachineAccept()), this,
                      SLOT(addItem()));
+    //m_dialog->setToolTipsVisible(true);
     m_dialog->show();
 
-    if(!m_dialog->getVirtualMachine()->getName().isEmpty() ||
-        !m_dialog->getVirtualMachine()->getType().isEmpty()){
+   if(!m_dialog->getVirtualMachine()->getType().isEmpty()) {
         m_virtualMachine.push_back(m_dialog->getVirtualMachine());
     }
-
-    //qDebug() << m_virtalMachine.count();
-    //qDebug() << m_dialog->getVirtualMachine()->getName();
 }
 
 void MainWindow::test() {
@@ -65,26 +62,26 @@ void MainWindow::on_listVirtuals_itemClicked(QListWidgetItem *item)
 }
 
 void MainWindow::write() {
-    QJsonArray mainJsonObject;
+    QJsonArray mainJsonArray;
     QJsonObject jsonObjectVirtuals;
     int counter = 0;
-    for(auto i : m_virtualMachine) {
+    for(auto iter : m_virtualMachine) {
         jsonObjectVirtuals.insert("virtual", QJsonValue( counter++));
-        jsonObjectVirtuals.insert("memory", QJsonValue(i->getMemory()));
-        jsonObjectVirtuals.insert("type", QJsonValue(i->getType()));
-        jsonObjectVirtuals.insert("name", QJsonValue(i->getName()));
-        jsonObjectVirtuals.insert("version", QJsonValue(i->getVersion()));
-        jsonObjectVirtuals.insert("ncpu", QJsonValue(i->getCpu()));
-        mainJsonObject.push_back(jsonObjectVirtuals);
+        jsonObjectVirtuals.insert("memory", QJsonValue(iter->getMemory()));
+        jsonObjectVirtuals.insert("type", QJsonValue(iter->getType()));
+        jsonObjectVirtuals.insert("name", QJsonValue(iter->getName()));
+        jsonObjectVirtuals.insert("version", QJsonValue(iter->getVersion()));
+        jsonObjectVirtuals.insert("ncpu", QJsonValue(iter->getCpu()));
+        mainJsonArray.push_back(jsonObjectVirtuals);
     }
 
     QJsonDocument jsonDoc;
-    jsonDoc.setArray(mainJsonObject);
+    jsonDoc.setArray(mainJsonArray);
     QByteArray data = jsonDoc.toJson();
 
     if( m_virtualMachine.count() > 0)  {
         QFile file("save.json");
-        file.open(QIODevice::WriteOnly);
+        file.open(QIODevice::WriteOnly | QIODevice::Text);
         file.write(data);
         file.close();
     }
@@ -99,18 +96,18 @@ void MainWindow::read() {
     QJsonParseError err;
     QJsonDocument jsonDoc = QJsonDocument::fromJson(json.toUtf8(), &err);
     if (err.error != QJsonParseError::NoError) {
-        qDebug() << err.errorString();
+        qDebug() << "Read json failed: " << err.errorString();
     } else {
-        QJsonArray arr = jsonDoc.array();
+        QJsonArray jsonArray = jsonDoc.array();
 
-        for(auto i : arr ) {
-            qDebug() << "memory: " << i.toObject().value("memory").toDouble();
+        for(auto iter : jsonArray ) {
+            qDebug() << "memory: " << iter.toObject().value("memory").toDouble();
             std::shared_ptr<VirtualMachine> virtualMachine = std::make_shared<VirtualMachine>();
-            virtualMachine->setName(i.toObject().value("name").toString());
-            virtualMachine->setMemory(i.toObject().value("memory").toInt());
-            virtualMachine->setType(i.toObject().value("type").toString());
-            virtualMachine->setVersion(i.toObject().value("version").toString());
-            virtualMachine->setCpu(i.toObject().value("ncpu").toInt());
+            virtualMachine->setName(iter.toObject().value("name").toString());
+            virtualMachine->setMemory(iter.toObject().value("memory").toInt());
+            virtualMachine->setType(iter.toObject().value("type").toString());
+            virtualMachine->setVersion(iter.toObject().value("version").toString());
+            virtualMachine->setCpu(iter.toObject().value("ncpu").toInt());
             m_virtualMachine.push_back(virtualMachine);
             ui->listVirtuals->addItem(virtualMachine->getName());
         }

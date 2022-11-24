@@ -17,19 +17,40 @@ public:
     QString getVersion();
     int getMemory();
     int getCpu();
+    QString getHostbridge();
+    QString getAhcicd();
+    QString getAhcihd();
+    QString getVirtio();
+    QString getIp();
+    int getHeigh();
+    int getWidth();
 
     void setName(const QString &name);
     void setType(const QString &type);
     void setVersion(const QString &version);
     void setMemory(int memory);
     void setCpu(int cpu);
+    void setHostbridge(const  QString &hostbridge);
+    void setAhcicd(const QString &ahcicd);
+    void setAhcihd(const QString &ahcihd);
+    void setVirtio(const QString &virtio);
+    void setIp(const QString &ip);
+    void setHeight(int height);
+    void setWidth(int width);
 
 private:
     QString m_name;
     QString m_type;
     QString m_version;
+    QString m_hostbridge;
+    QString m_ahcicd;
+    QString m_ahcihd;
+    QString m_virtio;
     int m_memory;
     int m_cpu;
+    QString m_ip;
+    int m_width;
+    int m_height;
 };
 
 namespace Ui {
@@ -62,6 +83,8 @@ private slots:
     void on_buttonBox_rejected();
     void on_CpuHorizontalSlider_valueChanged(int value);
     void on_CpuSpinBox_valueChanged(int arg1);
+    void on_pushButtonChooseIso_clicked();
+    void on_pushButtonChooseImg_clicked();
 
 private:
     void Memory();
