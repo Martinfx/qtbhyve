@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>491</width>
-    <height>422</height>
+    <height>461</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>-1</x>
      <y>-1</y>
      <width>491</width>
-     <height>421</height>
+     <height>461</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -33,7 +33,7 @@
         <property name="geometry">
          <rect>
           <x>300</x>
-          <y>380</y>
+          <y>420</y>
           <width>171</width>
           <height>22</height>
          </rect>
@@ -46,7 +46,7 @@
         <property name="geometry">
          <rect>
           <x>210</x>
-          <y>380</y>
+          <y>420</y>
           <width>81</width>
           <height>22</height>
          </rect>
@@ -272,7 +272,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>path/to/uefi/iso</string>
+         <string>iso</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButtonChooseIso">
@@ -311,7 +311,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>/path/to/img</string>
+         <string>img</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButtonChooseImg">
@@ -327,7 +327,7 @@
          <string>Choose</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="comboBox">
+       <widget class="QComboBox" name="comboBoxVirtio">
         <property name="geometry">
          <rect>
           <x>90</x>
@@ -338,32 +338,32 @@
         </property>
         <item>
          <property name="text">
-          <string>virtio-net </string>
+          <string>virtio-net</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>virtio-blk   </string>
+          <string>virtio-blk</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>virtio-scsi  </string>
+          <string>virtio-scsi</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>virtio-9p </string>
+          <string>virtio-9p</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>virtio-rnd </string>
+          <string>virtio-rnd</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>virtio-console </string>
+          <string>virtio-console</string>
          </property>
         </item>
        </widget>
@@ -380,7 +380,7 @@
          <string>virtio</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEditVirtio">
+       <widget class="QLineEdit" name="lineEditIfconfigName">
         <property name="geometry">
          <rect>
           <x>220</x>
@@ -497,13 +497,52 @@
          <string>ip</string>
         </property>
        </widget>
+       <widget class="QLabel" name="label_14">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>380</y>
+          <width>57</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>xhci</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditXhci">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>380</y>
+          <width>113</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>xhci</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditTablet">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>380</y>
+          <width>113</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>tablet</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="page_2">
        <widget class="QPushButton" name="NextPushButton_2">
         <property name="geometry">
          <rect>
           <x>210</x>
-          <y>380</y>
+          <y>420</y>
           <width>80</width>
           <height>22</height>
          </rect>
@@ -516,7 +555,7 @@
         <property name="geometry">
          <rect>
           <x>300</x>
-          <y>380</y>
+          <y>420</y>
           <width>165</width>
           <height>22</height>
          </rect>

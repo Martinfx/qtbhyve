@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="dialog.ui" line="55"/>
-        <location filename="dialog.ui" line="512"/>
+        <location filename="dialog.ui" line="551"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
@@ -27,13 +27,11 @@
     <message>
         <location filename="dialog.ui" line="105"/>
         <source>Micro$oft Windows</source>
-        <oldsource>MIcrosoft Windows</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialog.ui" line="110"/>
         <source>Linux</source>
-        <oldsource>LInux</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -68,11 +66,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog.ui" line="275"/>
-        <source>path/to/uefi/iso</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="dialog.ui" line="288"/>
         <location filename="dialog.ui" line="327"/>
         <source>Choose</source>
@@ -84,44 +77,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="dialog.ui" line="275"/>
+        <source>iso</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="dialog.ui" line="314"/>
-        <source>/path/to/img</source>
-        <oldsource>/path/img</oldsource>
+        <source>img</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialog.ui" line="341"/>
-        <source>virtio-net </source>
-        <oldsource> virtio-net </oldsource>
+        <source>virtio-net</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialog.ui" line="346"/>
-        <source>virtio-blk   </source>
-        <oldsource>  virtio-blk   </oldsource>
+        <source>virtio-blk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialog.ui" line="351"/>
-        <source>virtio-scsi  </source>
-        <oldsource>   virtio-scsi  </oldsource>
+        <source>virtio-scsi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialog.ui" line="356"/>
-        <source>virtio-9p </source>
+        <source>virtio-9p</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialog.ui" line="361"/>
-        <source>virtio-rnd </source>
-        <oldsource> virtio-rnd </oldsource>
+        <source>virtio-rnd</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialog.ui" line="366"/>
-        <source>virtio-console </source>
-        <oldsource> virtio-console </oldsource>
+        <source>virtio-console</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -170,20 +162,30 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog.cpp" line="248"/>
-        <location filename="dialog.cpp" line="258"/>
+        <location filename="dialog.ui" line="510"/>
+        <location filename="dialog.ui" line="523"/>
+        <source>xhci</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialog.ui" line="536"/>
+        <source>tablet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialog.cpp" line="293"/>
+        <location filename="dialog.cpp" line="303"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog.cpp" line="250"/>
+        <location filename="dialog.cpp" line="295"/>
         <source>Iso (*.iso)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog.cpp" line="260"/>
+        <location filename="dialog.cpp" line="305"/>
         <source>Img (*.img)</source>
-        <oldsource>Iso (*.img)</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -195,42 +197,94 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="40"/>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="33"/>
         <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="71"/>
+        <location filename="mainwindow.ui" line="40"/>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="50"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="78"/>
-        <source>PushButton</source>
+        <location filename="mainwindow.ui" line="57"/>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="94"/>
+        <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="107"/>
+        <source>Version:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="120"/>
+        <source>Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="133"/>
+        <source>Memory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="146"/>
+        <source>HostBridge:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="159"/>
+        <source>ahcicd:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="172"/>
+        <source>ahcihd:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="185"/>
+        <source>Cpu:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="198"/>
+        <location filename="mainwindow.ui" line="211"/>
+        <location filename="mainwindow.ui" line="224"/>
+        <location filename="mainwindow.ui" line="237"/>
+        <location filename="mainwindow.ui" line="250"/>
+        <location filename="mainwindow.ui" line="263"/>
+        <location filename="mainwindow.ui" line="276"/>
+        <location filename="mainwindow.ui" line="289"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="304"/>
         <source>FIle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="112"/>
+        <location filename="mainwindow.ui" line="309"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="121"/>
+        <location filename="mainwindow.ui" line="318"/>
         <source>toolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="132"/>
+        <location filename="mainwindow.ui" line="329"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>

@@ -37,16 +37,28 @@ QString VirtualMachine::getVirtio() {
     return m_virtio;
 }
 
+QString VirtualMachine::getIfconfigName() {
+    return m_ifconfigname;
+}
+
 QString VirtualMachine::getIp() {
     return m_ip;
 }
 
-int VirtualMachine::getHeigh(){
+int VirtualMachine::getHeight (){
     return m_height;
 }
 
 int VirtualMachine::getWidth(){
     return m_width;
+}
+
+QString VirtualMachine::getXhci(){
+    return m_xhci;
+}
+
+QString VirtualMachine::getTablet(){
+    return m_tablet;
 }
 
 void VirtualMachine::setName(const QString &name) {
@@ -85,6 +97,10 @@ void VirtualMachine::setVirtio(const QString &virtio){
     m_virtio = virtio;
 }
 
+void VirtualMachine::setIfconfigName(const QString &ifconfigname){
+    m_ifconfigname = ifconfigname;
+}
+
 void VirtualMachine::setIp(const QString &ip) {
     m_ip = ip;
 }
@@ -95,6 +111,14 @@ void VirtualMachine::setHeight(int height){
 
 void VirtualMachine::setWidth(int width)  {
     m_width = width;
+}
+
+void VirtualMachine::setXhci(const QString &xhci) {
+    m_xhci = xhci;
+}
+
+void VirtualMachine::setTablet(const QString &tablet) {
+    m_tablet = tablet;
 }
 
 Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
@@ -113,7 +137,7 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
         ui->MemoryHorizontalSlider->setValue(1024);
     }
 
-    m_virtualMachine = std::make_shared<VirtualMachine>();
+    m_virtualMachine = new VirtualMachine();
     ui->lineEdit->setText("VirtualMachine");
     m_virtualMachine->setName(ui->lineEdit->text());
 }
@@ -122,7 +146,7 @@ Dialog::~Dialog() {
     delete ui;
 }
 
-std::shared_ptr<VirtualMachine> Dialog::getVirtualMachine() {
+VirtualMachine* Dialog::getVirtualMachine() {
     return m_virtualMachine;
 }
 
@@ -230,6 +254,17 @@ void Dialog::on_buttonBox_accepted() {
     m_virtualMachine->setVersion(ui->OSVersionComboBox->currentText());
     m_virtualMachine->setMemory(ui->MemoryHorizontalSlider->value());
     m_virtualMachine->setCpu(ui->CpuHorizontalSlider->value());
+    m_virtualMachine->setHostbridge(ui->lineEditHostbridge->text());
+    m_virtualMachine->setAhcicd(ui->lineEditPathIso->text());
+    m_virtualMachine->setAhcihd(ui->lineEditPathImg->text());
+    m_virtualMachine->setVirtio(ui->comboBoxVirtio->currentText());
+    m_virtualMachine->setIfconfigName(ui->lineEditIfconfigName->text());
+    m_virtualMachine->setHostbridge(ui->lineEditHostbridge->text());
+    m_virtualMachine->setIp(ui->lineEditIp->text());
+    m_virtualMachine->setHeight(ui->lineEditWidth->text().toInt());
+    m_virtualMachine->setWidth(ui->lineEditHeight->text().toInt());
+    m_virtualMachine->setXhci(ui->lineEditXhci->text());
+    m_virtualMachine->setTablet(ui->lineEditTablet->text());
     emit VirtualMachineAccept();
     Dialog::close();
 }
@@ -240,6 +275,16 @@ void Dialog::on_buttonBox_rejected() {
     m_virtualMachine->setVersion("");
     m_virtualMachine->setMemory(0);
     m_virtualMachine->setCpu(0);
+    m_virtualMachine->setHostbridge("");
+    m_virtualMachine->setAhcicd("");
+    m_virtualMachine->setAhcihd("");
+    m_virtualMachine->setVirtio("");
+    m_virtualMachine->setIfconfigName("");
+    m_virtualMachine->setIp("");
+    m_virtualMachine->setHeight(0);
+    m_virtualMachine->setWidth(0);
+    m_virtualMachine->setXhci("");
+    m_virtualMachine->setTablet("");
     Dialog::close();
 }
 
@@ -260,5 +305,60 @@ void Dialog::on_pushButtonChooseImg_clicked()
                                                     tr("Img (*.img)"));
     qDebug() << filePath;
     ui->lineEditPathImg->setText(filePath);
+}
+
+void Dialog::on_lineEditHostbridge_textChanged(const QString &arg1)
+{
+    this->m_virtualMachine->setHostbridge(arg1);
+}
+
+void Dialog::on_lineEditPathIso_textChanged(const QString &arg1)
+{
+    this->m_virtualMachine->setAhcicd(arg1);
+}
+
+void Dialog::on_lineEditPathImg_textChanged(const QString &arg1)
+{
+    this->m_virtualMachine->setAhcihd(arg1);
+}
+
+void Dialog::on_lineEditVirtio_textChanged(const QString &arg1)
+{
+    this->m_virtualMachine->setVirtio(arg1);
+}
+
+void Dialog::on_lineEditIp_textChanged(const QString &arg1)
+{
+    this->m_virtualMachine->setIp(arg1);
+}
+
+void Dialog::on_lineEditWidth_textChanged(const QString &arg1)
+{
+    this->m_virtualMachine->setHeight(arg1.toInt());
+}
+
+void Dialog::on_lineEditHeight_textChanged(const QString &arg1)
+{
+    this->m_virtualMachine->setWidth(arg1.toInt());
+}
+
+void Dialog::on_lineEditXhci_textChanged(const QString &arg1)
+{
+    this->m_virtualMachine->setXhci(arg1);
+}
+
+void Dialog::on_lineEditTablet_textChanged(const QString &arg1)
+{
+    this->m_virtualMachine->setTablet(arg1);
+}
+
+void Dialog::on_comboBox_activated(const QString &arg1)
+{
+    this->m_virtualMachine->setVirtio(arg1);
+}
+
+void Dialog::on_lineEditIfconfigName_textChanged(const QString &arg1)
+{
+    this->m_virtualMachine->setIfconfigName(arg1);
 }
 

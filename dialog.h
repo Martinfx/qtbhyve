@@ -9,7 +9,8 @@
 class VirtualMachine
 {
 public:
-    VirtualMachine() : m_memory(0), m_cpu(0) {}
+    VirtualMachine() : m_memory(0), m_cpu(0),
+        m_height(0), m_width(0){}
     ~VirtualMachine() {}
 
     QString getName();
@@ -21,22 +22,28 @@ public:
     QString getAhcicd();
     QString getAhcihd();
     QString getVirtio();
+    QString getIfconfigName();
     QString getIp();
-    int getHeigh();
+    int getHeight();
     int getWidth();
+    QString getXhci();
+    QString getTablet();
 
     void setName(const QString &name);
     void setType(const QString &type);
     void setVersion(const QString &version);
     void setMemory(int memory);
     void setCpu(int cpu);
-    void setHostbridge(const  QString &hostbridge);
+    void setHostbridge(const QString &hostbridge);
     void setAhcicd(const QString &ahcicd);
     void setAhcihd(const QString &ahcihd);
     void setVirtio(const QString &virtio);
+    void setIfconfigName(const QString &ifconfigname);
     void setIp(const QString &ip);
     void setHeight(int height);
     void setWidth(int width);
+    void setXhci(const QString &xhci);
+    void setTablet(const QString &tablet);
 
 private:
     QString m_name;
@@ -51,6 +58,9 @@ private:
     QString m_ip;
     int m_width;
     int m_height;
+    QString m_xhci;
+    QString m_tablet;
+    QString m_ifconfigname;
 };
 
 namespace Ui {
@@ -66,7 +76,7 @@ public:
     ~Dialog();
     int getPhysMem();
     int getNCpu();
-    std::shared_ptr<VirtualMachine> getVirtualMachine();
+    VirtualMachine *getVirtualMachine();
 
 signals:
     void VirtualMachineAccept();
@@ -85,11 +95,22 @@ private slots:
     void on_CpuSpinBox_valueChanged(int arg1);
     void on_pushButtonChooseIso_clicked();
     void on_pushButtonChooseImg_clicked();
+    void on_lineEditHostbridge_textChanged(const QString &arg1);
+    void on_lineEditPathIso_textChanged(const QString &arg1);
+    void on_lineEditPathImg_textChanged(const QString &arg1);
+    void on_lineEditVirtio_textChanged(const QString &arg1);
+    void on_lineEditIp_textChanged(const QString &arg1);
+    void on_lineEditWidth_textChanged(const QString &arg1);
+    void on_lineEditHeight_textChanged(const QString &arg1);
+    void on_lineEditXhci_textChanged(const QString &arg1);
+    void on_lineEditTablet_textChanged(const QString &arg1);
+    void on_comboBox_activated(const QString &arg1);
+    void on_lineEditIfconfigName_textChanged(const QString &arg1);
 
 private:
     void Memory();
 
     Ui::Dialog *ui;
-    std::shared_ptr<VirtualMachine>  m_virtualMachine;
+    VirtualMachine *m_virtualMachine;
 };
 #endif // DIALOG_H
