@@ -218,15 +218,14 @@ void MainWindow::on_listVirtuals_itemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::on_playVirtual_clicked()
 {
-    //qDebug() << ui->listVirtuals->currentItem()->text();
     for(auto items : m_virtualMachine) {
         if(ui->listVirtuals->currentItem()->text() ==  items->getName()) {
             qDebug() << "Play!" << items->getName();
 
             /*QString list;
             list = "-s 0, " + items->getHostbridge()
-                          //<< " -s 3, " << items->getAhcicd()
-                          + " -s 4, ./" + items->getAhcihd()
+                          + " -s 3, " + items->getAhcicd()
+                          + " -s 4, " + items->getAhcihd()
                           + " -s 5, " + items->getVirtio() + " " + items->getIfconfigName()
                           + " -s 29, fbuf, tcp=" + items->getIp()
                           + ",w=" + QString::number(items->getWidth())
@@ -238,15 +237,20 @@ void MainWindow::on_playVirtual_clicked()
             qDebug() << "list: " << list;*/
             QProcess process;
             process.setProgram("/usr/sbin/bhyve");
-            process.setArguments( QStringList() << "-s 0, " << items->getHostbridge()
-                                                 << " -s 3, " << items->getAhcicd()
-                                                 << " -s 4, ." << items->getAhcihd()
-                                                 << " -s 5, " << items->getVirtio() << " " << items->getIfconfigName()
-                                                 << " -s 29, fbuf, tcp="<< items->getIp()
-                                                 << ",w="<< QString::number(items->getWidth())
-                                                 << ",h=" << QString::number(items->getHeight()) <<",wait"
-                                                 << " -s 31,lpc -l com1,stdio"
-                                                 << " -l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd uefivm"
+            //process.start(list);
+            process.setArguments( QStringList() <<//s "-c cpus=" + QString::number(items->getCpu())
+                                                 //+ "-m " + items->getMemory()
+                                                 // "-A -w -H -P "
+                                                  " -s 0," + items->getHostbridge()
+                                                 + " -s 3," + items->getAhcicd()
+                                                 + " -s 4,"+ items->getAhcihd()
+                                                 + " -s 5," + items->getVirtio() + ", " + items->getIfconfigName()
+                                                 + " -s 29, fbuf, tcp="+ items->getIp()
+                                                 + ",w=" + QString::number(items->getWidth())
+                                                 + ",h=" + QString::number(items->getHeight()) +",wait"
+                                                 + " -s 30,xhci,tablet"
+                                                 + " -s 31,lpc -l com1,stdio"
+                                                 + " -l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd uefivm"
                           );
 
 
