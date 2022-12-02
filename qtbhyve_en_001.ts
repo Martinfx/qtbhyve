@@ -289,4 +289,12 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>vnc</name>
+    <message>
+        <location filename="vnc.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

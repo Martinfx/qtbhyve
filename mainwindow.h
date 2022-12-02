@@ -10,6 +10,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include "dialog.h"
+#include "vnc.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -39,6 +40,7 @@ private:
     Ui::MainWindow *ui;
     std::shared_ptr<Dialog> m_dialog;
     QVector<VirtualMachine*> m_virtualMachine;
+    VNC *m_vnc;
     void test();
     /// read data from json file
     void read();
@@ -47,7 +49,7 @@ private:
     /// Selected item from widgetlist
     int m_selectedItem;
     /// Actual pid process
-    Q_PID pid;
+    //Q_PID pid;
 };
 
 #endif // MAINWINDOW_H

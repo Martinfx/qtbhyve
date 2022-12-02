@@ -22,10 +22,13 @@ set(PROJECT_SOURCES
         mainwindow.h
         dialog.cpp
         dialog.h
+        vnc.h
+        vnc.cpp
         qvncclientwidget.cpp
         qvncclientwidget.h
         mainwindow.ui
         dialog.ui
+        vnc.ui
         ${TS_FILES}
 )
 

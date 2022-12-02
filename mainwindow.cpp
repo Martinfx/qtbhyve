@@ -1,3 +1,5 @@
+#include <array>
+#include <iostream>
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
@@ -11,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     /// avoid empty index
     ui->listVirtuals->setCurrentRow(0);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -29,6 +33,8 @@ MainWindow::~MainWindow()
     write();
 
     qDeleteAll(m_virtualMachine);
+
+    delete m_vnc;
     delete ui;
 }
 
@@ -48,7 +54,6 @@ void MainWindow::on_newVirtual_clicked()
     //if(!m_dialog->getVirtualMachine()->getVersion().isEmpty()) {
         m_virtualMachine.push_back(m_dialog->getVirtualMachine());
     //}
-
     //qDebug() << "Test: " << m_dialog->getVirtualMachine()->getCpu();
 }
 
@@ -222,52 +227,46 @@ void MainWindow::on_playVirtual_clicked()
         if(ui->listVirtuals->currentItem()->text() ==  items->getName()) {
             qDebug() << "Play!" << items->getName();
 
-            /*QString list;
-            list = "-s 0, " + items->getHostbridge()
-                          + " -s 3, " + items->getAhcicd()
-                          + " -s 4, " + items->getAhcihd()
-                          + " -s 5, " + items->getVirtio() + " " + items->getIfconfigName()
-                          + " -s 29, fbuf, tcp=" + items->getIp()
-                          + ",w=" + QString::number(items->getWidth())
-                          + ",h=" + QString::number(items->getHeight()) + ",wait"
-                          + " -s 31,lpc -l com1,stdio"
-                          + " -l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd \
-                uefivm";
+            std::string list = + /*"-m "+QString::number(items->getMemory()).toStdString()+"M*/
+                               "-c "+QString::number(items->getCpu()).toStdString()
+                               +" -s 0,"+items->getHostbridge().toStdString()
+                               +" -s 3,ahci-cd,"+items->getAhcicd().toStdString()
+                               +" -s 4,ahci-hd,"+items->getAhcihd().toStdString()
+                               +" -s 5,"+items->getVirtio().toStdString()+","+items->getIfconfigName().toStdString()
+                               +" -s 29,fbuf,tcp="+items->getIp().toStdString()
+                               + ",w="+QString::number(items->getWidth()).toStdString()
+                               + ",h="+QString::number(items->getHeight()).toStdString()+",wait"
+                               + " -s 30,xhci,tablet \
+                                  -s 31,lpc -l com1,stdio \
+                                  -l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd uefivm";
+            std::cerr << list;
 
-            qDebug() << "list: " << list;*/
-            QProcess process;
-            process.setProgram("/usr/sbin/bhyve");
-            //process.start(list);
-            process.setArguments( QStringList() <<//s "-c cpus=" + QString::number(items->getCpu())
-                                                 //+ "-m " + items->getMemory()
-                                                 // "-A -w -H -P "
-                                                  " -s 0," + items->getHostbridge()
-                                                 + " -s 3," + items->getAhcicd()
-                                                 + " -s 4,"+ items->getAhcihd()
-                                                 + " -s 5," + items->getVirtio() + ", " + items->getIfconfigName()
-                                                 + " -s 29, fbuf, tcp="+ items->getIp()
-                                                 + ",w=" + QString::number(items->getWidth())
-                                                 + ",h=" + QString::number(items->getHeight()) +",wait"
-                                                 + " -s 30,xhci,tablet"
-                                                 + " -s 31,lpc -l com1,stdio"
-                                                 + " -l bootrom,/usr/local/share/uefi-firmware/BHYVE_UEFI.fd uefivm"
-                          );
+            std::string command("/usr/sbin/bhyve " + list);
 
+            std::array<char, 128> buffer;
+            std::string result;
 
-            if ( process.exitCode() != 0 )
+            qDebug() << "Opening reading pipe";
+            FILE* pipe = popen(command.c_str(), "r");
+            if (!pipe)
             {
-                qCritical() << "Exit Code: " << process.exitCode();
-                //return -1;
+                qDebug() << "Couldn't start command." ;
+                //return 0;
             }
 
+            while (fgets(buffer.data(), 128, pipe) != NULL) {
+                //qDebug() <<  "Reading...";
+                result += buffer.data();
+            }
 
-            process.start();
-            pid = process.processId();
-            process.waitForFinished();
-            //qDebug() << process.systemEnvironment();
-            qDebug() << process.readAllStandardError();
-            qDebug() << process.readAllStandardOutput();
-            process.close();
+            m_vnc = new VNC();
+            m_vnc->show();
+
+            int returnCode = pclose(pipe);
+
+            std::cerr << "result: " <<  result << std::endl;
+            std::cerr << "returnCode: " << returnCode << std::endl;
+
         }
     }
 }

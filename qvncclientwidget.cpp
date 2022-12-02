@@ -6,10 +6,11 @@ QVNCClientWidget::QVNCClientWidget(QWidget *parent) : QWidget(parent)
     setMouseTracking(true);
 }
 
-bool QVNCClientWidget::connectToVncServer(QString ip, QString password, int port)
+bool QVNCClientWidget::connectToVncServer(QString ip, const QString &password, int port)
 {
+     socket.setProxy(QNetworkProxy::NoProxy);
     socket.connectToHost(QHostAddress(ip), port);
-    if(socket.waitForConnected())
+    if(socket.waitForConnected(5000))
     {
         QByteArray response;
 
@@ -47,7 +48,7 @@ bool QVNCClientWidget::connectToVncServer(QString ip, QString password, int port
                 socket.waitForReadyRead();
                 response = socket.read(16); // Security Challenge
                 qDebug() << "Security Challenge " << response;
-                socket.write(desHash(response, password.toLatin1()));
+                //socket.write(desHash(response, password.toLatin1()));
                 socket.waitForReadyRead();
                 response = socket.read(4); // Security handshake result
                 qDebug() << "Security Handshake Result " << response.toInt();
